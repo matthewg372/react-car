@@ -1,5 +1,6 @@
 import React from 'react'
 import CarList from '../CarList'
+import NewCarForm from '../NewCarForm'
 
 
 class CarContainer extends React.Component{
@@ -28,6 +29,27 @@ class CarContainer extends React.Component{
 		}
 		
 	}
+	createCar = async (CarToAdd) => {
+		try{
+		const url = process.env.REACT_APP_API_URL + '/api/v1/Cars/'
+		const createdCarResponse = await fetch(url,{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(CarToAdd)
+		})
+		const creatCarJson = await createdCarResponse.json()
+		if(createdCarResponse.status === 201){
+			this.setState({
+          	cars: [...this.state.cars, creatCarJson.data]
+        })
+			
+		}
+		}catch(err){
+			console.log(err)	
+		}
+	}
 
 
 
@@ -35,6 +57,7 @@ class CarContainer extends React.Component{
 		return(
 			<div>
 			<CarList cars={this.state.cars}/>
+			<NewCarForm createCar={this.createCar}/>
 
 
 			</div>
