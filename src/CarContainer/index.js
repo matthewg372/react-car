@@ -1,4 +1,5 @@
 import React from 'react'
+import CarList from '../CarList'
 
 
 class CarContainer extends React.Component{
@@ -32,7 +33,11 @@ class CarContainer extends React.Component{
 
 	render(){
 		return(
-			<h1>connected</h1>
+			<div>
+			<CarList cars={this.state.cars}/>
+
+
+			</div>
 		)
 	}
 }
