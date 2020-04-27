@@ -31,7 +31,7 @@ class CarContainer extends React.Component{
 	}
 	createCar = async (CarToAdd) => {
 		try{
-		const url = process.env.REACT_APP_API_URL + '/api/v1/Cars/'
+		const url = process.env.REACT_APP_API_URL + '/api/v1/cars/'
 		const createdCarResponse = await fetch(url,{
 			method: 'POST',
 			headers: {

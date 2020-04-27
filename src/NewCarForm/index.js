@@ -9,10 +9,28 @@ class NewCarForm extends React.Component{
 			model: '',
 			make: '',
 			year: '',
-			suv: Boolean,
+			suv: '',
 
 		}
 
+	}
+	handleChange = (e) => {
+		const state = this.state
+		state[e.target.name] = e.target.value
+		this.setState(state)
+		
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.createCar(this.state)
+		this.setState({
+			model: '',
+			make: '',
+			year: '',
+			suv: ''
+
+		})
+		
 	}
 	render(){
 		return(
