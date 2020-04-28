@@ -1,14 +1,15 @@
 import React from 'react'
 import CarList from '../CarList'
 import NewCarForm from '../NewCarForm'
+import EditCarModal from '../EditCarModal'
 
 
 class CarContainer extends React.Component{
 	constructor(){
 		super()
 		this.state={
-			cars: []
-			idOfCarToEdit:-1
+			cars: [],
+			idOfCarToEdit: -1
 		}
 	}
 	componentDidMount(){
@@ -68,14 +69,14 @@ class CarContainer extends React.Component{
 			console.log(err)	
 		}
 	}
-	// editCar = (editCar) => {
-	// 	this.setState({
-	// 		idOfCarToEdit: editCar
+	editCar = (editCar) => {
+		this.setState({
+			idOfCarToEdit: editCar
 
-	// 	})
+		})
 
 		
-	// }
+	}
 
 
 
@@ -85,8 +86,16 @@ class CarContainer extends React.Component{
 			<CarList 
 			cars={this.state.cars}
 			deleteCar={this.deleteCar}
+			editCar={this.editCar}
 			/>
 			<NewCarForm createCar={this.createCar}/>
+			{
+				this.state.idOfCarToEdit !== -1
+				&&
+				<EditCarModal
+				editCar={this.state.cars.find((car) => car.id === this.state.idOfCarToEdit)}
+			/>
+			}
 
 
 			</div>

@@ -13,6 +13,9 @@ export default function CarsList(props){
 				<button onClick={() => props.deleteCar(car.id)}>
 				Delete
 				</button>
+				<button onClick={() => props.editCar(car.id)}>
+				Edit
+				</button>
 			</li>
 
 
