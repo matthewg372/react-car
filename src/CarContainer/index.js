@@ -8,6 +8,7 @@ class CarContainer extends React.Component{
 		super()
 		this.state={
 			cars: []
+			idOfCarToEdit:-1
 		}
 	}
 	componentDidMount(){
@@ -50,13 +51,41 @@ class CarContainer extends React.Component{
 			console.log(err)	
 		}
 	}
+	deleteCar = async (carToDelete) =>{
+		try{
+			console.log(carToDelete);		
+			const url = process.env.REACT_APP_API_URL + '/api/v1/cars/'
+			const deletedCarResponse = await fetch(url + carToDelete,{
+			method: 'DELETE',
+			})
+			const deletedCarJson = await deletedCarResponse.json()
+			if(deletedCarResponse.status === 200){
+				this.setState({
+					cars: this.state.cars.filter(car => car.id != carToDelete)
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	// editCar = (editCar) => {
+	// 	this.setState({
+	// 		idOfCarToEdit: editCar
+
+	// 	})
+
+		
+	// }
 
 
 
 	render(){
 		return(
 			<div>
-			<CarList cars={this.state.cars}/>
+			<CarList 
+			cars={this.state.cars}
+			deleteCar={this.deleteCar}
+			/>
 			<NewCarForm createCar={this.createCar}/>
 
 

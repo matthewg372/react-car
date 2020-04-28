@@ -1,6 +1,5 @@
 import React from 'react'
 export default function CarsList(props){
-	console.log(props.boolean);
 	const cars = props.cars.map(car =>{
 		return(
 			<li key={car.id}>
@@ -11,6 +10,9 @@ export default function CarsList(props){
 				year: {car.year}
 				<br/>
 				suv: {car.suv}
+				<button onClick={() => props.deleteCar(car.id)}>
+				Delete
+				</button>
 			</li>
 
 
