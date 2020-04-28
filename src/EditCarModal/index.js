@@ -9,7 +9,7 @@ class EditCarForm extends React.Component{
 			model: props.editCar.model,
 			make: props.editCar.make,
 			year: props.editCar.year,
-			suv: props.editCar.suv,
+			suv: props.editCar.suv
 
 		}
 

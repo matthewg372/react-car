@@ -77,6 +77,32 @@ class CarContainer extends React.Component{
 
 		
 	}
+	updateCar = async (updatedCarInfo) => {
+    const url = process.env.REACT_APP_API_URL + "/api/v1/cars/" + this.state.idOfCarToEdit
+    try {
+      const updateCarResponse = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(updatedCarInfo), 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const updateCarJson = await updateCarResponse.json()
+      if(updateCarResponse.status == 200) {
+        const cars = this.state.cars
+        const indexOfCarBeingUpdated = cars.findIndex(car => car.id == this.state.idOfCarToEdit)
+        cars[indexOfCarBeingUpdated] = updateCarJson.data
+        this.setState({
+          cars: cars,
+          idOfCarToEdit: -1
+        })
+      }
+    } catch(err) {
+      console.error(err)
+    }
+
+
+  }
 
 
 
@@ -94,6 +120,7 @@ class CarContainer extends React.Component{
 				&&
 				<EditCarModal
 				editCar={this.state.cars.find((car) => car.id === this.state.idOfCarToEdit)}
+				updateCar={this.updateCar}
 			/>
 			}
 
